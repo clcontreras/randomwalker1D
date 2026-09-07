@@ -30,9 +30,9 @@ int main() {
     std::random_device rd;
     for (int i = 0; i < N; ++i) {
         std::mt19937 gen(rd() + i); // Different seed for each sequence
-        std::uniform_int_distribution<> dis(0, 1); // 0 for left, 1 for right
+              std::uniform_real_distribution<double> dis(0.0, 1.0); // Decimales entre 0 y 1
         for (int j = 1; j <= S; ++j) {
-            int step = dis(gen) == 0 ? -1 : 1; // Step left or right
+            int step = dis(gen) < 0.7 ? 1 : -1; // 70% a la derecha, 30% a la izquierda
             random_walks[i][j] = random_walks[i][j - 1] + step; // Update position
         }
     }
