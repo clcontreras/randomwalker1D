@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # =====================================================================
 N = 1000       # Número de pasos temporales en la simulación
 M = 10000      # Número de caminantes (ensayos para estadística empírica)
-p = 0.6        # Probabilidad de paso hacia la derecha (+1)
+p = 0.5        # Probabilidad de paso hacia la derecha (+1)
 q = 1.0 - p    # Probabilidad de paso hacia la izquierda (-1)
 a = 1.0        # Longitud constante de cada paso discreto
 
@@ -65,6 +65,6 @@ plt.legend()
 plt.tight_layout()
 
 # Guardar la gráfica resultante en formato PNG de alta resolución
-nombre_imagen = 'graficas_caminante_asimétrico.png'
+nombre_imagen = 'graficas_caminante_simétrico.png'
 plt.savefig(nombre_imagen, dpi=300, bbox_inches='tight')
 print(f"Simulación finalizada. Gráficas guardadas con éxito como '{nombre_imagen}'.")
