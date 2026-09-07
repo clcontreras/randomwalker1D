@@ -1,3 +1,5 @@
+//Gerardo Adrián Jiménez García
+
 // This program simulates a simple random walker in a 1D grid size N and equally spaced points.
 // Walker starts at the center of the grid which is located at x=0, and takes steps to the left or right with equal probability.
 // A two dimensional vector is initialized to store the random walk sequence of S steps in a row, where each row corresponds to a random walk sequence generated from a different random seed.
@@ -22,6 +24,9 @@ int main() {
     std::cout << "Enter the number of random walk sequences N: ";
     int N;
     std::cin >> N;
+    std::cout << "Enter the probability p of stepping right (0 < p < 1, e.g. 0.30): "; // Ahora pedimos la probabilidad p de dar un paso a la derecha (q = 1 - p es la de ir a la izquierda)
+    double p;
+    std::cin >> p;
 
     // Initialize a 2D vector to store the random walk sequences
     std::vector<std::vector<int>> random_walks(N, std::vector<int>(S + 1, 0));
@@ -30,9 +35,10 @@ int main() {
     std::random_device rd;
     for (int i = 0; i < N; ++i) {
         std::mt19937 gen(rd() + i); // Different seed for each sequence
-        std::uniform_int_distribution<> dis(0, 1); // 0 for left, 1 for right
+        // bernoulli_distribution(p) permite una probabilidad p distinta de 0.5
+        std::bernoulli_distribution dis(p); // true (1) con probabilidad p = paso a la derecha
         for (int j = 1; j <= S; ++j) {
-            int step = dis(gen) == 0 ? -1 : 1; // Step left or right
+            int step = dis(gen) ? 1 : -1; // Step right with prob p, left with prob 1-p
             random_walks[i][j] = random_walks[i][j - 1] + step; // Update position
         }
     }
