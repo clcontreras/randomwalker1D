@@ -28,11 +28,12 @@ int main() {
 
     // Generate random walk sequences
     std::random_device rd;
+    double p_r = 0.7;
     for (int i = 0; i < N; ++i) {
         std::mt19937 gen(rd() + i); // Different seed for each sequence
-        std::uniform_int_distribution<> dis(0, 1); // 0 for left, 1 for right
+        std::bernoulli_distribution dis(p_r);
         for (int j = 1; j <= S; ++j) {
-            int step = dis(gen) == 0 ? -1 : 1; // Step left or right
+            int step = dis(gen) ? 1 : -1;
             random_walks[i][j] = random_walks[i][j - 1] + step; // Update position
         }
     }
